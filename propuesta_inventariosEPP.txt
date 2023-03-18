@@ -1,0 +1,493 @@
+Información del proyecto
+
+Datos
+
+Empresa / organización	LER PREVENCIÓN	
+Proyecto		Desarrollo de un Sistema de Información
+			de Inventarios para control E/S de elementos EPP
+Fecha de preparación		Febrero 24 del 2023
+Cliente		LER PREVENCIÓN	
+Patrocinador principal		LER PREVENCIÓN	
+Gerente Proyecto		Luis Rojas	
+Patrocinador / Patrocinadores		
+				
+Nombre		Cargo	Departamento	Rama ejecutiva
+Luis Rojas		Gerente LER	Gerencia	
+		PREVENCIÓN		
+
+
+Propósito y justificación del proyecto
+
+Desarrollar un software para el control y seguimiento de los inventarios de productos de EPP (Equipo de protección Personal).
+
+Dada la importancia del control del flujo de entradas y salidas de inventarios de productos EPP en aquellas empresas que lo requieren, se busca desarrollar un sistema de inventarios que partiendo de un recurso planificador para cada una de las áreas de una empresa se registre una programación presupuestaria a través de una ubicación técnica a cada uno de los involucrados en estos consumos de EPP a través de un cronograma del gasto mensual, bimensual, trimestral o semestral según el uso o consumo proyectado de los EPP.
+
+
+
+
+Descripción del proyecto y entregables
+
+Enmarcando el propósito del proyecto dentro de algunos apartes de ITIL (Estructuras de Tecnología de la información) contribuye a la gestión de los procesos relacionados con TI dentro de una organización empresarial. 
+
+En este marco de referencia de ITIL recoge la gestión de los servicios de TI en el conjunto de buenas prácticas a gestión de la seguridad de la información, gestión de niveles de servicios, perspectiva del negocio, gestión de activos de software y aplicaciones. 
+
+El conjunto de procesos de flujo de trabajo de este desarrollo de software está relacionados a un Servicio estratégico (SS), Servicio de diseño (SD), Servicio de operaciones (SD), Servicio continuo de mejoramiento (CST) y Servicio de transición (ST).
+
+
+1.Servicio Estratégico - Service Strategy (SS)
+
+1.1 Estrategia General
+
+Para lograr el planteamiento general del servicio estratégico de este proyecto se apoyó en:
+
+•	Entrevistas con el stakeholders cabeza del proyecto para conocer y aterrizar la idea del proyecto.
+•	Documentos de Excel donde se explica la matriz de protección personal de elementos de EPP 
+•	Investigación y captación de conocimiento acerca de los catálogos de servicios que intervienen en un sistema de información de inventarios E/S de EPP. 
+ 
+El siguiente diagrama UML relaciona todos los flujos de trabajo dentro del marco ITIL que van a conformar el sistema de información de inventarios E/S de EPP.
+
+Con este diagrama se pretende explicar gráficamente la estrategia del servicio (SS) de ITIL. 
+
+ 
+
+ El diagrama explica los flujos de procesos ITIL que se relacionan en el sistema de información de inventarios E/S EPP a construir y su comportamiento:
+
+Tres elementos principales representativos del diagrama se describen
+
+Actor: Representado por una figura humana es el usuario que interactúa con el Sistema y sus procesos.
+
+Sistema: Representado por el rectángulo es el sistema de inventarios E/S EPP
+
+Caso de uso: Representado por una elipse describe el proceso
+
+
+El actor administrador: monitorea y supervisa los procesos de ubicación técnica, proveedores, productos y bodegas.
+
+El caso de uso ubicación técnica es un proceso de codificación de ubicación física del elemento en uso de EPP.
+
+El actor planificador: consolida las planificaciones presupuestadas de todas las áreas de la empresa, si, la estrategia de la organización desea centralizar en este funcionario esta actividad, pero los requerimientos son competencia propios del usuario de área.
+
+El actor usuario de área: planifica su presupuesto es responsable del plan de su unidad empresarial y gestiona los requerimientos de su área.
+
+Proceso planificador contempla ID planificador, ubicación técnica, empleado, producto, texto planificador, cantidad planeada, total planeado ($), total realizado ($), cronograma (mensual, bimensual, trimestral, semestral).
+
+El registro planificador puede no tener empleado (se reemplaza por código genérico) cuando se quiere planificar un equipo de EPP no relacionado a empleado.
+
+El costeo de lo total planeado ($) es el cálculo de cantidad planeada según el cronograma por el costo del producto.
+
+El costo de lo total realizado ($) son las salidas valorizadas del almacén a cada una de las ubicaciones técnicas de los registros planificados.
+
+Proceso requisición se activará como resultado de una alerta cuando las fechas programadas del ID registro planificado esta próximo a cumplirse (indicador de proximidad parametrizable).
+
+La requisición no necesariamente tiene como requisito previo un registro planificado puede haber la excepción (previa autorización) para agregar nuevos productos.
+
+
+
+
+
+
+
+
+Proceso Cotización y Compra
+
+
+En gestión del actor comprador 
+
+Gestiona las requisiciones y las transforma en cotizaciones a diferentes proveedores. El proceso se evalúa para tres cotizaciones midiendo indicadores de precios, disponibilidad del producto y calificación del proveedor. Pero queda a criterio del comprador la selección de la mejor cotización. Se manejan tres estados (Solicitada, aprobada y cancelada). Los ID del registro planificado ahora son el detalle de las cotizaciones solicitadas.
+
+La cotización no necesariamente tiene como requisito previo la requisición puede haber la excepción (previa autorización) para cotizar directamente un producto.
+
+Gestiona la orden de compra por carga desde cotizaciones aprobadas. Se manejan tres estados (Solicitada, aprobada y cancelada).
+
+Proceso Entradas y Salidas
+
+El actor almacenista gestiona la recepción de los elementos EPP que despachó el proveedor acompañado de su respectiva factura de compra.
+
+Previa revisión de los elementos recibidos procede a generar una entrada de almacén importando la orden de compra correspondiente, ingreso del número de factura de compra, estado (aprobado, cancelado), ingreso total o parcial de los productos y almacén.
+
+Por último, en el proceso de salida de almacén se agrega de la orden de compra y sus ID de registros planificados para actualizar el costo de lo total realizado ($).
+
+1.2 Competitividad y posicionamiento de mercado
+
+Por experiencia del stakeholders cabeza del proyecto ve la viabilidad de construir un software de inventarios que controle E/S de los elementos de EPP.
+
+En Organizaciones de salud, Empresas de seguridad industrial, Empresas de proyectos de ingeniería, etc. Ven la necesidad de controlar más inteligentemente los EPP en cantidades y costos de requerimientos de dotación con vigilancia en stock de bodegas y stock en uso alineados al presupuesto de cada una de las áreas de la empresa. 
+
+
+1.3 Tipos de proveedores de servicio
+ 
+Dentro de una organización empresarial se distinguen varias unidades de servicio (Recursos humanos, finanzas y administración, TI, etc.)  que muy seguramente van a requerir de algún elemento de EPP a través del catalogo de servicio (Sistema de inventarios de E/S de EPP) programado en el presupuesto de cada unidad y tramitado a través de este con un proveedor externo de servicios. 
+
+
+
+
+1.4 Gestión del servicio como un factor estratégico
+
+Por definición de ITIL V3 se dice que es responsable de definir y mantener la perspectiva (visión y dirección), la posición (cómo competimos contra otros proveedores de servicios), los planes (cómo iremos de la situación actual a la situación deseada) y los patrones (series de acciones a lo largo del tiempo que se han de repetir para alcanzar los objetivos estratégicos) de la organización respecto de los servicios y la gestión de los mismos.
+
+1.5 Diseño organizacional y estratégico
+
+Las empresas formalizadas cuentan con un diseño organizacional con sus funciones, procesos y relaciones debidamente establecidas.
+
+El catalogo de servicio (Sistema de inventario E/S de EPP) como aporte de TI a la organización tiene por objetivo contribuir con tecnología en el mejoramiento de sus procesos y funciones a cada una de las unidades organizacionales en el control más inteligente del gasto de elementos de EPP alineados a su propio presupuesto.
+
+1.6 Procesos y actividades clave
+
+La implementación del catálogo de servicio (Sistema de inventario E/S de EPP) para ser usado en cada una de las unidades de la empresa debe generar una responsabilidad en cabeza de un propietario del proceso asegurando y garantizando que este se gestione para lograr el objetivo efectivamente de programar el gasto de EPP en el presupuesto de su área.
+
+1.7 Gestión financiera
+
+Por definición de ITIL V3 “... apoyar las estrategias y planes de gestión de servicios de la organización asegurando que sus recursos financieros e inversiones se están utilizando de manera efectiva".
+
+El catalogo de servicio (Sistema de inventario E/S de EPP) aportado por TI pretende planear y controlar el gasto de elementos de EPP en cada una de las unidades del negocio.
+
+1.8 Dossier de servicios
+
+Preparar un documento corporativo para presentar a los proveedores de elementos de EPP que dentro de los alcances de este catalogo de servicio (Sistema de inventarios E/S de EPP) además de llevar una estadística de compras, mejores precios, calidad de productos, oportunidad de entregas, etc. proyecta externalizar el catálogo de servicio a aquellos proveedores que cumplan dichos requisitos y sean favorecidos tecnológicamente con este software para generación de pedidos. 
+
+1.9 Gestión de la demanda
+
+Por definición de ITIL V3 La gestión de la demanda ayuda a una organización a planificar un presupuesto y a ceñirse a él. Es decir, colabora para que la empresa utilice sus recursos de forma eficiente, evitando el derroche. Es decir que los recursos no están ociosos; por el contrario, generan valor.
+
+
+Al externalizar el catálogo de servicio a los proveedores se busca asegurar un servicio de proveeduría que cumpla las necesidades oportunamente y eficientemente de los clientes demandantes de los elementos de EPP.
+
+2. Diseño de servicios - Service Design (SD)
+
+El diseño de servicio para ITIL V3 es un componente del ciclo de vida de un servicio. Por definición de ITIL V3 el modelo de desarrollo se basa en diferentes niveles de gestión, entre los que hay que negociar con el cliente y los proveedores, gestionar el servicio para mantenerlo activo y en unas condiciones apropiadas, así como disponer de seguridad para alejar cualquier posible problemática con la información contenida en nuestro servicio, además de saber y poder reconstruir los servicios tras cualquier tipo de incidencia.
+
+2.1 Gestión de niveles de servicio
+
+Como marco de referencia del servicio a implementar (Sistema de inventarios E/S de EPP) se desarrolla una serie de aspectos para y con el cliente(s) del nuevo apoyo tecnológico. 
+
+El ciclo de la calidad que puede asumirse como buena práctica para la Gestión de los Niveles de Servicio en ITIL se pueden enmarcar en una metodología como
+
+
+ 
+
+
+2.1.1.1 Planificación
+
+El objetivo de la planificación de un Servicio es orientarlo hacia cómo poner en marcha las actuaciones necesarias que permitan ofrecer a nuestros clientes un servicio acorde a sus necesidades.
+
+Catálogo de servicios
+
+El Sistema de inventarios E/S de EPP formara parte de la cartera de servicios de TI como nuevo apoyo tecnológico a la organización.
+
+Esta propuesta de proyecto describe el nuevo servicio a implementar esquematizado en el diagrama UML con mucho detalle de como el nuevo catálogo de servicio ofrece, con la tecnicidad suficiente para que el cliente pueda comprender y discernir si sus necesidades pueden ser suplidas por el nuevo elemento de TI.
+
+
+
+
+
+
+Requisitos de nivel de servicios
+
+Para lograr abstraer las necesidades puntuales de los clientes de un sistema de inventarios se hace la tarea de investigar el comportamiento de estos sistemas de información logrando captar el funcionamiento, características de este servicio y como complementarlo con un proceso de control presupuestario.
+
+El diagrama UML refleja la interacción del servicio con su infraestructura de TI y la integración del servicio con otros servicios del cliente.
+
+Hojas de especificaciones
+
+Reúne las condiciones para determinar detalladamente los aspectos del (SLR). Como responsabilidades, funciones, detalle técnico de las operaciones las cuales a continuación se describen:
+
+Arquitectura del Software
+
+
+Requerimientos: El modelo de casos de uso UML arriba explicado identifica el alcance de los requerimientos solicitados por el cliente LER PREVENCIÓN de tal manera que estaremos cubriendo la etapa de requerimientos los cuales se estudiaran a más detalle en la medida del desarrollo de la etapa de diseño.
+
+Diseño: Es la etapa central del Sistema de Inventarios de mayor atención y cuidado donde intervienen tres (3) arquitecturas debidamente estructuradas e interrelacionadas como a continuación se explica:
+
+1.	Modelo de datos
+
+Creación del esquema [inv.] inventarios en un sistema relacional de base de datos MySQL, SQL SERVER, Oracle, PostgreSQL (por confirmar), este nuevo esquema contendrá el nuevo modelo de datos relacional del Sistema de Inventarios E/S de EPP.
+
+Se implementará procedimientos almacenados para bajar el tráfico de red y mejorar el rendimiento como también para administrar las alertas del proceso planificador.
+
+En el diseño del nuevo modelo se crearán nuevas entidades como producto y ficha técnica relacionadas a la entidad de empleado de SIGESS con el fin de estructurar la EPP.
+
+La entidad [Planificador] en su estructura tendrá un campo ID de identificación, un campo llamado ubicación técnica que según la estructura que se defina podrá enrutar la ubicación física del elemento EPP como por ejemplo empresa, Departamento, Ciudad, Localidad, Área y complementando el registro planificador con el empleado, producto y el cronograma de las actividades ya sean mensuales bimensuales, trimestrales o semestrales.
+
+El registro planificador controla el área de la empresa, el centro de costo, la cuenta del gasto, la cantidad planificada, el Total costo planificado, el Total Costo Realizado.
+
+En la entidad [Requisición] se carga los registros alertas del planificador y facilita al usuario de área generar las requisiciones pertinentes al cronograma de actividades planificado. Switchea tres estados solicitado, aprobado, cancelado. Se abre en dos entidades [Requisición cabecera] con su ID, control de Tipo de documento, numero de RQ, área, estado, fecha de solicitud, fecha de entrega, revisado por, aprobado por, observaciones y [Requisición Detalle] con su ID, Id planificador, cantidad requisición, Un, observación.
+
+En la entidad [Cotización] se carga los registros de requisición aprobados y hereda tres cotizaciones a proveedores como requisito para la compra según los indicadores de precios y calificación del proveedor o a discreción del comprador. Switchea tres estados solicitada, aprobada, cancelada. Se abre en dos entidades [Cotización Cabecera] con su ID, tipo cotización, numero de cotización, fecha cotización, proveedor, responsable, moneda, numero de RQ y [Cotización detalle] con su ID, id Planificador, cantidad cotización, Un, precio Unit, %IVA, subtotal, observaciones.
+
+
+En la entidad [Orden de Compra] se carga los registros de la cotización aprobada y switchea tres estados solicitada, aprobada, cancelada. Se abre en dos entidades [OC Cabecera] con su ID, tipo OC, numero OC, estado OC, fecha solicitud, fecha entrega, revisado por, aprobado por, numero de cotización, Estado de OC y [OC detalle] con su ID, id Planificador, cantidad, Un, precio unit, %IVA, subtotal, observaciones.
+
+En la entidad [Entrada de Almacén] se agrega la Orden de compra para el ingreso de la mercancía. Se abre en dos entidades [EA Cabecera] con su ID, numero de entrada, fecha de entrada, recibido por, fecha recepción, factura de compra, observaciones y [EA Detalle] con su ID, id Planificador, cantidad, Un, precio unit, %IVA, subtotal, fecha entrada, almacén, observaciones. Si la entrada de almacén es parcial la Orden de Compra queda en estado de pendiente.
+
+En la entidad [Salida de Almacén] se genera la distribución de los productos EPP a cada una de las áreas que hicieron sus respectivas requisiciones actualizando la [entidad Planificador] en el total del costo realizado según los ID procesados. Se abre en dos entidades [SA Cabecera] con su ID, numero de salida, fecha salida, revisado salida, aprobado salida, observaciones y [SA Detalle] con su ID, id planificador, cantidad, Un, precio unit, Almacén, observaciones.
+
+2.	Api Backend
+
+Sitio web donde reside el servidor (Glassfish 5), la aplicación desarrollada en JavaEE con el JDK Java 1.8 y la base de datos (por definir).
+
+Sitio web con servidor Spring Boot (3.0.1), JDK java 1.8 y la base de datos (por definir)  
+
+En el desarrollo de la aplicación Backend se utilizará la arquitectura RESTful utilizando el protocolo HTTP en el formato JSON como un desarrollo Cliente-Servidor independiente de SIGESS, pero con conexión a la base de datos sigess.
+
+El API se desarrollará en tres capas: Datos, lógica y servicio aplicando el modelo MVC para un mejor control del proyecto.
+
+3.	Api Front End
+
+Se desarrollará con el framework de angular y lenguaje typescript de Microsoft. 
+
+Angular es un framework enfocado a la creación de aplicaciones web del tipo SPA.
+
+En la construcción del Front End interviene tres tecnologías: HTML5, CSS, TYPESCRIPT(JavaScript).
+
+El siguiente gráfico explica las tres arquitecturas que intervienen en el desarrollo del Sistema de Inventarios.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Son entonces tres desarrollos de Api’s integrados de tal manera que para el consumo del Api Backend desde el Api front end enruta a un end point a traves del protocolo de comunicaciones HTTP a través de los metodos GET, POST, PUT, DELETE.
+
+Entregables:
+
+Arquitectura Base de datos modelo entidad relación
+
+1.	Tabla de descripción de entidades
+2.	Tabla de Descripción de atributos y sus restricciones naturales (Tipo de Dato) y Adicionales Dominios (Lista de Valores, Rangos de Valores y Restricciones generales)
+3.	Matriz de Relaciones
+4.	Descripción ampliada de las relaciones determinadas en la Matriz de Relaciones (Análisis de Roles, Cardinalidad/Opcionalidad, Grado, Cualidad de identificación, Transferibilidad)
+5.	Modelo Lógico
+6.	Modelo Relacional
+7.	Descripción Semántica de las Relaciones con el Lenguaje ERDish
+8.	Script SQL del Modelo Relacional (MySQL, PostgreSQL, SQL SERVER, Oracle) por definir.
+
+Arquitectura Api Backend
+
+Proyecto codificado en NetBeans IDE 12.4 con la documentación de la capa de datos, capa lógica y capa de servicio.
+
+
+Arquitectura Api Front End
+
+Proyecto Angular en VSCODE de Microsoft con la documentación de cada uno de los componentes del Sistema de Inventarios E/S de EPP.
+
+
+
+2.1.1.2 Desarrollo
+
+
+Definidos los objetivos para puesta en marcha del servicio basado en la planificación.
+
+Para comenzar a implementar el servicio, es necesario que se haya acordado formalmente con el cliente la planificación previa. El desarrollo posterior vendrá avalado por tanto por unas decisiones que soporten todas las actuaciones que han de llevarse a cabo, validadas por el cliente, elemento no excluyente para que la nueva documentación también tenga que ser acordada y validada por este. 
+
+Acuerdo de nivel de servicio (SLA)
+
+En el acuerdo de Nivel de Servicio se detalla información técnica, aspectos relacionados con el cliente, localización es detallar absolutamente todos los elementos del Acuerdo de cara al cliente e internamente. 
+
+Este documento propuesto de proyecto recoge aproximadamente todos estos aspectos como buena practica para lograr el objetivo(s) del proyecto.
+
+Acuerdo de nivel de operación (OLA)
+
+En este se desarrollan todos los acuerdos sobre las necesidades del cliente desarrollando los procesos y procedimientos internos que intervienen en la puesta en marcha del Servicio TI.
+
+Contrato de soporte (UC)
+
+Trata de asegurar y delimitar las responsabilidades de los proveedores que interactúen con el servicio, ya sea una contratación para la implementación o bien una contratación de soporte o suministros.
+
+
+
+
+
+
+
+
+2.1.1.3 Verificación – Validación
+
+Seguimiento o monitorización. El objetivo que persigue la monitorización de las actuaciones es mantener o mejorar el nivel de calidad del Servicio ofertado mediante la medición de indicadores de rendimiento.
+
+En el comienzo de esta verificación se hará sobre los módulos prototipados del sistema de inventarios E/S de EPP hasta lograr la sintonización técnica y de cubrimiento total de todos los aspectos involucrados en cada uno de los procesos.
+
+
+2.1.1.4 Mejora
+
+Revisión o mejora. El objetivo de este proceso es mantener la revisión constante de la calidad del Servicio. 
+
+Todo proceso de mejora continua ha de tener un marco de referencia. En este caso se trata de realizar una revisión constante de todos los procesos llevados a cabo desde la firma del Acuerdo de Nivel de Servicio (SLA) e incluso el Catálogo de Servicio, ya que este ha podido quedar obsoleto durante el transcurso de la ejecución de este Servicio.
+
+
+
+
+
+
+Requerimientos de alto nivel
+
+Requerimientos del producto
+
+
+1.	Apoyo técnico por parte del stakeholders director de sistemas para determinar compatibilidades entre las versiones en desarrollo Vs versiones en producción según la siguiente tabla
+
+
+En desarrollo Windows	En producción Linux
+PostgreSQL 14.1 a 64 bits	PostgreSQL versión?
+Servidor Glassfish 5	¿Servidor Payara versión?
+Java JDK 1.8	¿Java JDK versión?
+	
+
+2.	Apoyo técnico del stakeholders director de sistemas para la guía paso a paso de conectividad al servidor en la nube tanto para la ejecución de scripts del nuevo modelo de datos del sistema de inventarios y publicación del Backend JavaEE de inventarios.
+
+3.	Modelo relacional del Sistema de Inventarios
+
+4.	Casos de prueba en ambiente de desarrollo (mediante un documento que establece las condiciones de ejecución, las entradas de la prueba, y los resultados esperados)
+
+
+
+
+
+Requerimientos del proyecto
+
+
+1.	Documento de requerimientos revisado y aprobado por stakeholders de LER PREVENCION
+
+2.	Permisos para conectividad al servidor en la nube como usuario de prueba para verificación de scripts de los puntos funcionales (PF) del modelo en modo consulta.
+ 
+
+
+Objetivos
+
+
+Objetivo	Indicador de éxito
+Alcance	
+Construcción de un sistema de inventarios	• Api de Backend con RESTful
+	permite independencia
+como módulo complementario a SIGESS	Cliente/Servidor (que se
+desarrollando tres (3) API integradas así:	comunican en lenguaje de
+• Front end arquitectura del lado del	intercambio Json).
+	• Api front end de Angular
+cliente	consumiendo servicios del end
+• Backend arquitectura del lado del	point de inventarios.
+servidor	• Niveles de ingreso para seguridad
+• MER del sistema de inventarios	por usuario desde el Front end
+Para la medición y estimación del software	• Api de Backend puede ser
+	accesado para consumo de
+en tiempos y costos se utiliza el método de	servicios desde una App móvil
+análisis de puntos de función (PF) para	
+cada uno de los casos de uso del sistema.	
+
+Se estima 680 PF
+
+PF es el proceso de medición o de conteo
+
+basado	en	la	evaluación	de	los
+
+requerimientos	funcionales	del	sistema
+
+según el estimado en el modelo de casos
+de uso.
+
+Un requerimiento funcional en cada uno de
+los casos de uso son las actividades y
+
+operaciones que el software debe cumplir
+
+para dar cumplimiento a:
+
+1.	Descripciones de los datos a ser ingresados en el sistema.
+
+2.	Descripciones de las operaciones a ser realizadas por cada pantalla.
+
+3.	Descripción de los flujos de trabajo realizados por el sistema.
+
+4.	Descripción de los reportes del sistema y otras salidas.
+
+5.	Definición de quien puede ingresar datos en el sistema.
+
+ 
+Cronograma (Tiempo)	
+Para la construcción de 680 PF se estima	
+un tiempo de 6 meses	
+	
+Calidad	
+	Cálculo exacto en las operaciones de los
+El Software a desarrollar se regirá a las	procesos funcionales estimados para cada
+normas, políticas y requerimientos de un	caso de uso
+sistema de inventarios.	
+	Funcionabilidad: Dado que los desarrollos
+	y procesos se hacen justo a la medida se
+	hacen   prácticos   y   utilitarios   a   los
+	requerimientos inicialmente planteados
+	Flexibilidad:  El desarrollo y montaje se
+	ajusta con facilidad a nuevos crecimientos
+	
+
+
+
+
+Premisas y restricciones
+
+
+1.	No tener acceso oportuno a las entrevistas para ingeniería de requerimientos del proyecto de Sistema de inventarios
+
+2.	Tener acceso a consultas y apoyo técnico permanente de parte del equipo técnico de LER PREVENCIÓN durante las fases es de desarrollo.
+
+
+
+
+Riesgos iniciales de alto nivel
+
+
+1.	Requerimientos planteados incompletos para la propuesta del proyecto Sistema de Inventarios
+
+2.	Solicitud de cambios o imprevistos que no fueron contemplados e impacten el diseño del proyecto
+
+3.	Ajustes perfectivos complementarios tendrá costos y tiempos adicionales los cuales se estimarán según su alcance.
+
+ 
+Cronograma de hitos principales
+
+Hitos	Fecha tope
+• Aprobación Proyecto	Febrero 24 del 2023
+• MER modelamiento de datos	
+• Inicio construcción del Backend	
+• Pruebas específicas del Backend	
+mediante ejecución, entradas de	
+prueba y resultados	
+• Inicio construcción del Front end	
+• Pruebas específicas del Front end	
+mediante ejecución, entradas de	
+prueba y resultados	
+	
+
+
+Lista de interesados (stakeholders)
+
+Nombre	Cargo	Departamento	Rama ejecutiva
+Luis Eduardo Rojas	Gerente proyecto	Gerencia	
+Marco Acero	Director sistemas	Sistemas	
+Henry Antonio Vargas	Analista programador		
+			
+
+Personal y recursos preasignados
+
+Recurso	Departamento	Rama ejecutiva
+Por contratación servicios
+		
+		
+
+Aprobaciones
+
+Patrocinador	Departamento	Rama ejecutiva
+LER PREVENCIÓN  100%	Gerencia	
+
