@@ -8,6 +8,7 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
 
 
 @javax.ws.rs.ApplicationPath("api")
+//probando
 public class AppConfig extends Application {
     public AppConfig(){
         
