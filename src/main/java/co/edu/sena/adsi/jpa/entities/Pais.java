@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name="paises")
@@ -38,6 +39,7 @@ public class Pais implements Serializable {
         this.id = id;
     }
 
+    @XmlTransient
     public List<Departamento> getDepartamentosList() {
         return departamentosList;
     }

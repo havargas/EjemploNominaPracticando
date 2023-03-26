@@ -16,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
+
 
 @Entity
 @Table(name="usuarios")
@@ -28,7 +30,7 @@ public class Usuario implements Serializable{
     @Basic(optional=false)
     @NotNull
     @Size(min=3,max=20)
-    @Column(name="nombre")
+    @Column(name="nombres")
     private String nombres;
     
     @Basic(optional=false)
@@ -69,10 +71,10 @@ public class Usuario implements Serializable{
     
     //relaciones
     
-    //como usuario se relaciona con cargouno a muchos
+    //como usuario se relaciona con cargo uno a muchos
     //entonces definimos el JoinColumn
     @JoinColumn(name="id_cargo",referencedColumnName="id")
-    @OneToOne(optional=false,mappedBy="usuario")
+    @OneToOne(optional=false)    
     //como estamos con una llave foranea y de donde
     //proviene es de la entidad Cargo entonces la 
     //definimos
@@ -97,7 +99,7 @@ public class Usuario implements Serializable{
     //ManyToOne
     //Un usuario solo puede tener un jefe
     @JoinColumn(name="id_jefe_inmediato",referencedColumnName="id")
-    @ManyToOne
+    @ManyToOne(optional=true)
     private Usuario jefeInmediato;
     //----fin relacion recursiva ----
     @OneToMany(mappedBy="empleado")
@@ -218,7 +220,8 @@ public class Usuario implements Serializable{
     public void setCiudad(Ciudad ciudad) {
         this.ciudad = ciudad;
     }
-
+   
+    @XmlTransient
     public List<Usuario> getUsuariosList() {
         return usuariosList;
     }

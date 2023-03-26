@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name="nominas")
@@ -74,6 +75,7 @@ public class Nomina implements Serializable {
         this.mes = mes;
     }
 
+    @XmlTransient
     public List<DetalleNomina> getDetalleNominaList() {
         return detalleNominaList;
     }

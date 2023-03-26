@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name="roles")
@@ -59,6 +60,7 @@ public class Rol implements Serializable {
         this.descripcion = descripcion;
     }
 
+    @XmlTransient
     public List<UsuariosHasRoles> getUsuarioHasRolesList() {
         return usuarioHasRolesList;
     }

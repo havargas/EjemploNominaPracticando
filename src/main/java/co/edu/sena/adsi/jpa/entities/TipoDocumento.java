@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlTransient;
 
 @Entity
 @Table(name="tipos_documento")
@@ -60,6 +61,7 @@ public class TipoDocumento implements Serializable {
         this.descripcion = descripcion;
     }
 
+    @XmlTransient
     public List<Usuario> getUsuariosList() {
         return usuariosList;
     }
